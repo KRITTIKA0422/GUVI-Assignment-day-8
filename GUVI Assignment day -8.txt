@@ -1,0 +1,192 @@
+1. https://github.com/rvsp/typescript-oops/blob/master/Practice/Movie.md
+The class Movie is stated below. An instance of class Movie represents a film. This class has the following three properties:
+
+title, which is a String representing the title of the movie
+studio, which is a String representing the studio that made the movie
+rating, which is a String representing the rating of the movie (i.e. PG­13, R, etc)
+a) Write a constructor for the class Movie, which takes a String representing the title of the movie, a String representing the studio, and a String representing the rating as its arguments, and sets the respective class properties to these values.
+
+b) The constructor for the class Movie will set the class property rating to "PG" as default when no rating is provided.
+
+c) Write a method getPG, which takes an array of base type Movie as its argument, and returns a new array of only those movies in the input array with a rating of "PG". You may assume the input array is full of Movie instances. The returned array need not be full.
+
+d) Write a piece of code that creates an instance of the class Movie with the title “Casino Royale”, the studio “Eon Productions”, and the rating “PG­13”
+
+CODE-
+class Movie{                                   //class Movie starts
+    Constructor(title,studio,rating="PG"){     //rating "PG" set as default rating in case where rating is not provided
+    //setting the values of properties- title, studio, rating
+    this.title=title;
+    this.studio=studio;
+    this.rating=rating;                       
+    }
+    }
+    function getPG(array)                       //function getPG starts and takes an array input in parameters
+    {
+    let filmtitle=[];
+    array.forEach(function(filmgroup){          //forEach function starts 
+    if(filmgroup.rating=="PG")                  //checks for "PG" rating              
+    filmtitle.push(filmgroup.title);            //pushes films having "PG" rating in filmtitle[]
+    })
+    return filmtitle;                           //returns the filmtitle[]
+    }
+    let film1=new Movie("Casino Royale","Eon Productions","PG-13");   //creates an object/instance of the class Movie
+    let film2=new Movie("Casino","Eon Productions","PG");             //creates another object/instance of the class Movie
+    let film3=new Movie("Frozen","Disney Productions","R");            //creates another object/instance of the class Movie
+    let film4=new Movie("Captain America","Marvel studios");            //creates another object/instance of the class Movie
+    var array=[{title:"Casino Royale",                             //assigning value to array of function getPG(),it takes array of instances of movie
+                studio:"Eon Productions",
+                rating:"PG13"},
+               {title:"Casino",
+                studio:"Eon Productions",
+                rating:"PG"},
+               {title:"Frozen",
+                studio:"Disney Productions",
+                rating:"R"},
+               {title:"Captain America",
+                studio:"Marvel studios",
+                rating:"PG"}];
+
+    console.log(getPG(array));                                //prints the films having "PG" rating in an array
+
+OUTPUT-
+[ 'Casino', 'Captain America' ]
+
+2. https://github.com/rvsp/typescript-oops/blob/master/Practice/class-circle.md
+
+CODE-
+class Circle{                       //Circle class starts
+    setRadius(radius){              //takes radius as parameter of the method setRadius()
+    this.radius=radius;
+    }
+    getRadius(){                    //gets and returns the radius
+    return this.radius;
+    }
+    setColor(color){                //takes color as parameter of the method setColor()
+    this.color=color;
+    }
+    getColor(){                     //gets and returns the color
+    return this.color;
+    }
+    toString(){
+    let r=this.radius.toString();
+    let c= this.color.toString();     //converts color and radius to string
+    return `Circle[Radius=${r},Color=${c}]`;      //returns radius and color
+    }
+    getArea(){
+    return `Area=${(3.142*(this.radius)**2)}`;       //calculates and returns area of the circle
+    }                                               
+    getCircumference(){
+    return `Circumference=${(2*3.142*(this.radius))}`;    //calculates and returns the circumference of the circle
+    }
+    }                                                     //class ends
+    let circle1=new Circle();                            //creates an instance circle1 of the class Circle
+    circle1.setRadius(1.0);                              //gives value of radius and calls the function
+    circle1.getRadius();                                 
+    circle1.setColor("red");                             //gives color of the circle and calls the function 
+    circle1.getColor();
+    console.log(circle1.toString());                     //calls the method and prints the radius and color of circle
+    console.log(circle1.getArea());                      //calls the method and prints the area of the circle
+    console.log(circle1.getCircumference());             //calls the method and prints the circumference of the circle
+    
+OUTPUT-
+Circle[Radius=1,Color=red]
+Area=3.142
+Circumference=6.284
+
+3. Write a “person” class to hold all the details.
+
+CODE-
+class Person{                                   //Parent class starts
+static companyName="Amazon";                    //static member
+Constructor(name,age,gender,city){              //sets the values for 4 properties
+this.name=name;
+this.age=age;
+this.gender=gender;
+this.city=city;
+}                                                 //constructor ends
+getData(){                                       //instance method starts
+let personData=`
+Name:${this.name}
+Age:${this.age}
+Gender:${this.gender}
+City:${this.city}`;
+console.log(personData);                           // printing the properties of the object
+}                                                 //Instance method ends
+static getCompanyName(){                          //static method starts
+console.log(Person.companyName);                  //printing the static member
+}                                                 //static method ends
+}                                                 //class Person ends
+class Employee extends Person{                    //Child class Employee starts and inherits from parent class Person
+static companyNew="Google";                       //static member
+Constructor(name,age,gender,city,designation,salary){  //sets the values for 6 properties
+super(name,age,gender,city);                           //inherits 4 properties from parent class
+this.designation=designation;
+this.salary=salary;
+}                                                      //Constructor ends
+getData(){                                             //instance method starts
+let employeeData=`
+Name:${this.name}
+Age:${this.age}
+Gender:${this.gender}
+City:${this.city}
+Designation:${this.designation}
+Salary:${salary}
+`;
+console.log(employeeData);                              // printing the properties of the object
+}                                                       //Instance method ends
+static getCompanyName(){                                 //static method starts
+console.log(Employee.companyNew);                        //printing the static member
+}                                                        //static method ends
+}                                                        //class Employee ends
+let employee1=new Employee("Jack","25","Male","Kolkata","Data Analyst","50000");     //creating object of Employee class (child class)  and assigning values to the properties
+employee1.getData();                                                                //calling methods
+Employee.getCompanyName();                                                         //calling static method; static methods can be accessed only with the help of class
+let person1=new Person("John","22","Male","Delhi");                               //creating object of Person class (parent class) and assigning values to the properties
+person1.getData();                                                                //calling methods
+Person.getCompanyName();                                                         //calling static method
+
+OUTPUT-
+Name: Jack
+Age: 25
+Gender: Male
+City: Kolkata
+Designation: Data Analyst
+Salary: 50000
+
+Amazon
+Google
+
+Name: John
+Age: 22
+Gender: Male
+City: Delhi
+
+Amazon
+
+4. write a class to calculate uber price.
+
+CODE-
+class Uber{                                                      //class Uber starts
+  
+  constructor(baseFee,bookingFee,surcharge,toll){               //setting different criteria of uber price
+    this.baseFee=baseFee;
+    this.bookingFee=bookingFee;
+    this.surcharge=surcharge;
+    this.toll=toll;
+  }
+  getData(unitCost,distance){        //instance method starts and takes the unit cost per distance according to supply and demand and taking the distance to be covered  
+    let UberPrice=this.baseFee+this.bookingFee+this.surcharge+this.toll+(unitCost*distance);       //calculating and returning uber price
+    return `UBER PRICE=${UberPrice} rupees`;
+  }        //instance method ends
+  }        //class Uber ends
+ 
+let uber1=new Uber(50,30,40,10);     //creating object and assigning values of different criteria of price
+console.log(uber1.getData(20,5));    //calling, assigning unit cost and distance and printing the uber price
+
+OUTPUT
+UBER PRICE=230 rupees
+
+
+
+
